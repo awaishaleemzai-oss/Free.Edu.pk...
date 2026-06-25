@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page not found — Sab Seekhein</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+/* ============================================================
+   css/style.css
+   Sab Seekhein — design tokens + all site styling.
+
+   Palette is rooted in school paperwork: bone-paper backgrounds,
+   pine-green ink, and a marigold "stamp" accent used for the
+   one signature motif — the education ladder.
+
+   Type: Lora (display, used sparingly) + Inter (body) +
+   JetBrains Mono (labels, stats, grade ranges — anything that
+   reads like a roll number or a mark sheet).
+   ============================================================ */
+
+:root {
+  /* ---- Color tokens ---- */
+  --paper: #F7F4EC;
+  --paper-deep: #EFEAD9;
+  --white: #FFFEFB;
+  --ink: #1C2B22;
+  --ink-soft: #4B5A4F;
+  --ink-faint: #7C8A7E;
+  --green-deep: #143626;
+  --green: #2F6B45;
+  --green-soft: #E3ECE0;
+  --marigold: #D98A1F;
+  --marigold-soft: #FBE8CB;
+  --line: #DCD5C3;
+  --line-strong: #C7BEA6;
+  --shadow: rgba(20, 54, 38, 0.10);
+
+  /* ---- Type ---- */
+  --font-display: "Lora", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+  /* ---- Layout ---- */
+  --radius: 10px;
+  --radius-lg: 16px;
+  --container: 1180px;
+}
+
+/* ============================================================
+   Reset + base
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--green-deep);
+  margin: 0 0 0.4em;
+  line-height: 1.18;
+  font-weight: 700;
+}
+
+h1 { font-size: 40px; letter-spacing: -0.01em; }
+h2 { font-size: 30px; }
+h3 { font-size: 19px; }
+h4 { font-size: 16px; }
+
+p { margin: 0 0 1em; color: var(--ink-soft); }
+
+a {
+  color: var(--green-deep);
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 28px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--green-deep);
+  color: var(--white);
+  padding: 10px 16px;
+  z-index: 1000;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--marigold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+main { display: block; }
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 22px;
+  border-radius: var(--radius);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+
+.btn-primary {
+  background: var(--green-deep);
+  color: var(--white);
+}
+.btn-primary:hover { background: var(--green); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line-strong);
+  color: var(--green-deep);
+}
+.btn-ghost:hover {
+  border-color: var(--green);
+  background: var(--green-soft);
+}
+
+/* ============================================================
+   Site header
+   ============================================================ */
+
+.site-header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--green-deep);
+  color: var(--marigold-soft);
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  direction: rtl;
+}
+
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--green-deep);
+}
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-faint);
+  letter-spacing: 0.01em;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.main-nav li { margin-left: 28px; }
+.main-nav li:first-child { margin-left: 0; }
+.main-nav a {
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--ink-soft);
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+}
+.main-nav a:hover { color: var(--green-deep); }
+.main-nav a.is-current {
+  color: var(--green-deep);
+  border-bottom-color: var(--marigold);
+  font-weight: 600;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 0 auto;
+  background: var(--green-deep);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-nav {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  transition: max-height 0.25s ease;
+}
+.mobile-nav.is-open { max-height: 320px; }
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 8px 28px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.mobile-nav a {
+  display: block;
+  padding: 12px 0;
+  font-weight: 500;
+  color: var(--ink-soft);
+  border-bottom: 1px solid var(--line);
+}
+.mobile-nav a.is-current { color: var(--green-deep); font-weight: 600; }
+
+@media (max-width: 760px) {
+  .main-nav { display: none; }
+  .nav-toggle { display: flex; }
+  .mobile-nav { display: block; }
+}
+
+/* ============================================================
+   Hero + the ladder (signature element)
+   ============================================================ */
+
+.hero {
+  padding: 64px 0 56px;
+  background:
+    radial-gradient(circle at 85% -10%, var(--marigold-soft) 0%, transparent 55%),
+    var(--paper);
+  overflow: hidden;
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  background: var(--marigold-soft);
+  border: 1px solid var(--marigold);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 22px;
+}
+
+.hero h1 {
+  font-size: 46px;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--marigold);
+  font-family: var(--font-display);
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--ink-soft);
+  max-width: 480px;
+  margin-bottom: 30px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+/* The ladder: a literal vertical rail with rungs, each rung a
+   real grade-stage. Built as the page's one bold, hand-built
+   moment — everything else stays quiet around it. */
+.hero-ladder {
+  position: relative;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 14px;
+  padding-left: 34px;
+}
+
+.hero-ladder::before {
+  content: "";
+  position: absolute;
+  left: 9px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background-image: linear-gradient(var(--line-strong) 0, var(--line-strong) 60%, transparent 60%, transparent 100%);
+  background-size: 2px 14px;
+  background-repeat: repeat-y;
+}
+
+.hero-ladder .rung {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 13px 18px;
+  box-shadow: 0 2px 10px var(--shadow);
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.hero-ladder .rung::before {
+  content: "";
+  position: absolute;
+  left: -29px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 2.5px solid var(--green);
+}
+
+.hero-ladder .rung:hover {
+  transform: translateX(3px);
+  border-color: var(--green);
+}
+
+.hero-ladder .rung:last-child::before {
+  background: var(--marigold);
+  border-color: var(--marigold);
+}
+
+.hero-ladder .num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.hero-ladder .name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--ink);
+}
+.hero-ladder .range {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 860px) {
+  .hero .container { grid-template-columns: 1fr; gap: 36px; }
+  .hero h1 { font-size: 34px; }
+  .hero-ladder { padding-left: 30px; }
+}
+
+/* ============================================================
+   Stats strip
+   ============================================================ */
+
+.stats-strip {
+  background: var(--green-deep);
+  padding: 30px 0;
+}
+.stats-strip .container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.stats-strip .stat {
+  text-align: center;
+  color: var(--white);
+}
+.stats-strip .stat .num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--marigold-soft);
+}
+.stats-strip .stat .label {
+  font-size: 13px;
+  color: #C7D6CC;
+  margin-top: 4px;
+}
+
+@media (max-width: 700px) {
+  .stats-strip .container { grid-template-columns: repeat(2, 1fr); gap: 28px 18px; }
+}
+
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+
+.section {
+  padding: 72px 0;
+}
+.section-tight { padding: 36px 0; }
+.section-alt { background: var(--paper-deep); }
+
+.section-head {
+  max-width: 620px;
+  margin-bottom: 40px;
+}
+
+.kicker {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--marigold);
+  margin-bottom: 10px;
+}
+
+.section-head p { font-size: 16px; }
+
+/* ============================================================
+   Path navigator (rungs as nav, reused on home + stage page)
+   ============================================================ */
+
+.path-nav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+
+.path-nav a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px 16px 14px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.path-nav a:hover {
+  transform: translateY(-3px);
+  border-color: var(--green);
+  box-shadow: 0 6px 16px var(--shadow);
+}
+.path-nav a.is-current {
+  border-color: var(--marigold);
+  background: var(--marigold-soft);
+}
+
+.path-nav .rung-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+  font-weight: 600;
+}
+.path-nav .rung-label {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--ink);
+}
+.path-nav .rung-range {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 860px) {
+  .path-nav { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .path-nav { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Stage blocks (homepage previews)
+   ============================================================ */
+
+.stage-block {
+  padding: 36px 0;
+  border-top: 1px solid var(--line);
+}
+.stage-block:first-child { border-top: none; padding-top: 0; }
+
+.stage-head {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+.rung-tag {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--stage-color, var(--green));
+  padding: 3px 9px;
+  border-radius: 5px;
+}
+.stage-head h3 { margin: 0; }
+.stage-grade {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink-faint);
+}
+.stage-tagline {
+  font-size: 15px;
+  margin-bottom: 22px;
+  max-width: 600px;
+}
+
+/* ============================================================
+   Resource cards + grid
+   ============================================================ */
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.resource-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 20px 20px 18px;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  position: relative;
+}
+.resource-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--green);
+  box-shadow: 0 10px 24px var(--shadow);
+}
+
+.resource-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cost-pill {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--green-deep);
+  background: var(--green-soft);
+  border: 1px solid var(--green);
+  padding: 3px 10px;
+  border-radius: 100px;
+  letter-spacing: 0.01em;
+}
+
+.resource-type {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--ink-faint);
+}
+
+.resource-card h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.resource-card p {
+  font-size: 14px;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.tag {
+  font-size: 11.5px;
+  font-family: var(--font-mono);
+  color: var(--ink-soft);
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+
+.resource-card-go {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--green-deep);
+}
+
+@media (max-width: 980px) {
+  .resource-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .resource-grid { grid-template-columns: 1fr; }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 56px 20px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+}
+.empty-mark {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  color: var(--ink-faint);
+  display: block;
+  margin-bottom: 8px;
+}
+.empty-state p { max-width: 380px; margin: 0 auto; }
+
+/* ============================================================
+   Steps (how-it-works)
+   ============================================================ */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.step {
+  border-top: 2px solid var(--green-deep);
+  padding-top: 16px;
+}
+.step-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--marigold);
+  display: block;
+  margin-bottom: 8px;
+}
+.step h3 { margin-bottom: 8px; }
+.step p { font-size: 14.5px; margin-bottom: 0; }
+
+@media (max-width: 760px) {
+  .steps { grid-template-columns: 1fr; gap: 24px; }
+}
+
+/* ============================================================
+   Callout
+   ============================================================ */
+
+.callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--green-deep);
+  border-radius: var(--radius-lg);
+  padding: 34px 36px;
+  flex-wrap: wrap;
+}
+.callout h3 { color: var(--white); margin-bottom: 6px; }
+.callout p { color: #C7D6CC; margin-bottom: 0; max-width: 480px; }
+.callout .btn-primary { background: var(--marigold); color: var(--green-deep); flex-shrink: 0; }
+.callout .btn-primary:hover { background: #C27D17; }
+
+@media (max-width: 600px) {
+  .callout { padding: 28px; }
+}
+
+/* ============================================================
+   Page hero (about / contribute / resources / scholarships / stage)
+   ============================================================ */
+
+.page-hero {
+  padding: 56px 0 44px;
+  background: var(--paper-deep);
+  border-bottom: 1px solid var(--line);
+}
+.page-hero[id="stage-page-hero"] {
+  border-bottom-color: var(--stage-color, var(--line));
+  border-bottom-width: 3px;
+}
+
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  margin-bottom: 16px;
+}
+.breadcrumb a { color: var(--ink-faint); }
+.breadcrumb a:hover { color: var(--green-deep); }
+
+.page-hero h1 { font-size: 32px; margin-bottom: 12px; }
+.page-hero p { font-size: 16px; max-width: 620px; margin-bottom: 0; }
+
+/* ============================================================
+   Filter bar, chips, search
+   ============================================================ */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+#global-search, #stage-search {
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 15px;
+  padding: 13px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+#global-search:focus, #stage-search:focus { border-color: var(--green); }
+
+.filter-chip {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  color: var(--ink-soft);
+  padding: 8px 16px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.filter-chip:hover { border-color: var(--green); color: var(--green-deep); }
+.filter-chip.is-active {
+  background: var(--green-deep);
+  border-color: var(--green-deep);
+  color: var(--white);
+}
+
+.results-meta {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--ink-faint);
+  margin-bottom: 18px;
+}
+
+/* ============================================================
+   Scholarships list
+   ============================================================ */
+
+.scholarship-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.scholarship-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--marigold);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  flex-wrap: wrap;
+}
+.scholarship-item h4 { margin-bottom: 6px; }
+.scholarship-item p { font-size: 14.5px; margin-bottom: 0; max-width: 560px; }
+.scholarship-item .btn { flex-shrink: 0; }
+
+@media (max-width: 640px) {
+  .scholarship-item { padding: 18px; }
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+
+.site-footer {
+  background: var(--green-deep);
+  color: #C7D6CC;
+  padding: 56px 0 0;
+  margin-top: 40px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 40px;
+  padding-bottom: 40px;
+}
+
+.footer-brand .brand-name {
+  color: var(--white);
+  font-size: 18px;
+}
+.footer-brand p {
+  color: #9FB5A6;
+  font-size: 14px;
+  margin-top: 10px;
+  max-width: 320px;
+}
+
+.footer-col h4 {
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.footer-col a {
+  color: #C7D6CC;
+  font-size: 14.5px;
+}
+.footer-col a:hover { color: var(--marigold-soft); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: 18px 0 22px;
+}
+.footer-bottom p {
+  color: #8AA192;
+  font-size: 12.5px;
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+}
+
+/* ============================================================
+   Contribute form (cards already styled inline in contribute.html;
+   keep tokens consistent here for anything not covered there)
+   ============================================================ */
+
+.form-card h3 { margin-bottom: 6px; }
+
+  </style>
+</head>
+<body>
+  <div id="site-header"></div>
+  <main>
+    <section class="section" style="text-align:center; padding:100px 0;">
+      <div class="container">
+        <span class="hero-eyebrow" style="justify-content:center;">404</span>
+        <h1 style="color:var(--green-deep); font-size:36px; margin-bottom:14px;">This page wandered off.</h1>
+        <p style="color:var(--ink-soft); margin-bottom:28px;">The page you're looking for doesn't exist, or the link is broken.</p>
+        <a href="index.html" class="btn btn-primary">Back to home</a>
+      </div>
+    </section>
+  </main>
+  <div id="site-footer"></div>
+  <script>
+/* ============================================================
+   js/main.js
+   Shared header/footer injection, mobile nav, and small helpers
+   used across pages (SabSeekhein.escapeHtml, getQueryParam).
+   ============================================================ */
+
+const SabSeekhein = {
+  escapeHtml(str) {
+    if (str === undefined || str === null) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  },
+
+  getQueryParam(key) {
+    const search = window.location.search.replace(/^\?/, "");
+    if (!search) return null;
+    const pairs = search.split("&");
+    for (let i = 0; i < pairs.length; i++) {
+      const [k, v] = pairs[i].split("=");
+      if (decodeURIComponent(k) === key) {
+        return v ? decodeURIComponent(v.replace(/\+/g, " ")) : "";
+      }
+    }
+    return null;
+  }
+};
+
+(function () {
+  const NAV_LINKS = [
+    { href: "index.html", label: "Home" },
+    { href: "resources.html", label: "All Resources" },
+    { href: "scholarships.html", label: "Scholarships" },
+    { href: "about.html", label: "About" }
+  ];
+
+  function currentFile() {
+    const path = window.location.pathname.split("/").pop();
+    return path === "" ? "index.html" : path;
+  }
+
+  function renderHeader() {
+    const mount = document.getElementById("site-header");
+    if (!mount) return;
+    const current = currentFile();
+
+    mount.innerHTML = `
+      <header class="site-header">
+        <div class="container header-inner">
+          <a href="index.html" class="brand">
+            <span class="brand-mark" aria-hidden="true">سب</span>
+            <span class="brand-text">
+              <span class="brand-name">Sab Seekhein</span>
+              <span class="brand-sub">سب سیکھیں &middot; everyone learns</span>
+            </span>
+          </a>
+          <nav class="main-nav" aria-label="Primary">
+            <ul>
+              ${NAV_LINKS.map(l => `
+                <li><a href="${l.href}" class="${l.href === current ? "is-current" : ""}">${l.label}</a></li>
+              `).join("")}
+            </ul>
+          </nav>
+          <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Open menu">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+        <div class="mobile-nav" id="mobile-nav">
+          <ul>
+            ${NAV_LINKS.map(l => `
+              <li><a href="${l.href}" class="${l.href === current ? "is-current" : ""}">${l.label}</a></li>
+            `).join("")}
+          </ul>
+        </div>
+      </header>
+    `;
+
+    const toggle = document.getElementById("nav-toggle");
+    const mobileNav = document.getElementById("mobile-nav");
+    if (toggle && mobileNav) {
+      toggle.addEventListener("click", () => {
+        const isOpen = mobileNav.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+        toggle.classList.toggle("is-open", isOpen);
+      });
+      mobileNav.addEventListener("click", (e) => {
+        if (e.target.tagName === "A") {
+          mobileNav.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+          toggle.classList.remove("is-open");
+        }
+      });
+    }
+  }
+
+  function renderFooter() {
+    const mount = document.getElementById("site-footer");
+    if (!mount) return;
+
+    const stageLinks = (typeof SITE_DATA !== "undefined")
+      ? SITE_DATA.stages.map(s => `<li><a href="stage.html?id=${s.id}">${s.label}</a></li>`).join("")
+      : "";
+    const stageColumn = stageLinks
+      ? `<div class="footer-col"><h4>Stages</h4><ul>${stageLinks}</ul></div>`
+      : "";
+
+    mount.innerHTML = `
+      <footer class="site-footer">
+        <div class="container footer-grid">
+          <div class="footer-col footer-brand">
+            <span class="brand-name">Sab Seekhein</span>
+            <p>A free directory of free learning. No accounts, no paywalls, no catch — built and kept up to date by people who used these resources themselves.</p>
+          </div>
+          ${stageColumn}
+          <div class="footer-col">
+            <h4>Site</h4>
+            <ul>
+              <li><a href="resources.html">All Resources</a></li>
+              <li><a href="scholarships.html">Scholarships</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contribute.html">Suggest a resource</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="container footer-bottom">
+          <p>Sab Seekhein is an independent, unaffiliated directory. We link to official sources — we don't host or charge for anything.</p>
+        </div>
+      </footer>
+    `;
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+    renderHeader();
+    renderFooter();
+  });
+})();
+
+  </script>
+</body>
+</html>
